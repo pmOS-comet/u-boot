@@ -238,7 +238,7 @@ CONFIG_KASLR=y
 
 # Mecha-Comet Configs
 CONFIG_DEFAULT_DEVICE_TREE="mecha-comet"
-CONFIG_DEFAULT_FDT_FILE="imx8mm-mecha-comet-m-gen1.dtb"
+CONFIG_DEFAULT_FDT_FILE="imx8mm-mecha-comet-m-gen1-rev3.dtb"
 CONFIG_SYS_VENDOR="mecha"
 CONFIG_SYS_BOARD="mecha_comet"
 CONFIG_TARGET_MECHA_COMET=y
