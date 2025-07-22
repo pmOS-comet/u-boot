@@ -345,7 +345,7 @@ int scene_menu_display(struct scene_obj_menu *menu)
 	struct scene_menitem *item;
 	const char *pstr;
 
-	printf("U-Boot    :    Boot Menu\n\n");
+	printf("Mecha Boot Menu\n\n");
 	if (menu->title_id) {
 		struct scene_obj_txt *txt;
 		const char *str;
