@@ -1,0 +1,6 @@
+Mecha Comet Device
+M:	Gagan Malvi <gagan@ersa.dev>
+S:	Maintained
+F:	board/mecha/comet/
+F:	include/configs/comet.h
+F:	configs/comet_defconfig
