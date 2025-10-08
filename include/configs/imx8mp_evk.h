@@ -164,7 +164,7 @@
 #define CFG_SYS_INIT_RAM_SIZE	0x80000
 
 
-/* Totally 6GB DDR */
+/* Totally 4GB DDR */
 #define CFG_SYS_SDRAM_BASE		0x40000000
 #define PHYS_SDRAM			0x40000000
 #define PHYS_SDRAM_SIZE			0xC0000000	/* 3 GB */
@@ -172,7 +172,7 @@
 #ifdef CONFIG_TARGET_IMX8MP_DDR4_EVK
 #define PHYS_SDRAM_2_SIZE		0x40000000	/* 1 GB */
 #else
-#define PHYS_SDRAM_2_SIZE		0xC0000000	/* 3 GB */
+#define PHYS_SDRAM_2_SIZE		0x40000000	/* 1 GB */
 #endif
 
 #define CFG_MXC_UART_BASE		UART2_BASE_ADDR

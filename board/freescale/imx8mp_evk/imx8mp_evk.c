@@ -26,8 +26,11 @@
 #include <usb.h>
 #include <dwc3-uboot.h>
 #include <mmc.h>
+#include <power/bq27xxx_fg.h>
 
 DECLARE_GLOBAL_DATA_PTR;
+
+#undef CONFIG_USB_TCPC
 
 #define UART_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_FSEL1)
 #define WDOG_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_ODE | PAD_CTL_PUE | PAD_CTL_PE)
@@ -77,6 +80,36 @@ int board_early_init_f(void)
 	imx_iomux_v3_setup_multiple_pads(uart_pads, ARRAY_SIZE(uart_pads));
 
 	init_uart_clk(1);
+
+	return 0;
+}
+
+int power_fg_i2c_init_update(uint8_t i2c_bus, uint8_t addr)
+{
+	struct udevice *i2c_dev;
+	struct udevice *bus;
+	int ret;
+	uint8_t valb;
+
+	ret = uclass_get_device_by_seq(UCLASS_I2C, i2c_bus, &bus);
+	if (ret) {
+		printf("%s: Can't find bus\n", __func__);
+		return -EINVAL;
+	}
+
+	ret = dm_i2c_probe(bus, addr, 0, &i2c_dev);
+	if (ret) {
+		printf("%s: Can't find device id=0x%x\n",
+			__func__, addr);
+		return -ENODEV;
+	}
+
+	if(i2c_dev == NULL) {
+		printf("Err:i2c bus handler not found\n");
+		return -ENODEV;
+	}
+
+	power_fg_init_update(i2c_bus, i2c_dev);
 
 	return 0;
 }
@@ -486,6 +519,7 @@ int board_late_init(void)
 	env_set("board_name", "EVK");
 	env_set("board_rev", "iMX8MP");
 #endif
+	power_fg_i2c_init_update(2,0x55);
 
 	return 0;
 }
