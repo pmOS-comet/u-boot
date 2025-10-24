@@ -3,6 +3,7 @@
 
 #include <common.h>
 #include <errno.h>
+#include <dm.h>
 #include <power/bq27xxx_fg.h>
 #include <i2c.h>
 

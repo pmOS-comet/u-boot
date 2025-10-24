@@ -98,10 +98,10 @@ typedef struct BQ27XXX_BATTAERY{
 	u8 supply_status;
 	u8 capacity_level;
 
-}bq27xxx_battery;
+} bq27xxx_battery;
 
-
-int power_fg_init(unsigned char bus, struct udevice *i2c_dev );
-int power_check_battery(bq27xxx_battery *); 
+int power_fg_init(unsigned char bus, struct udevice *i2c_dev);
+int power_fg_init_update(unsigned char, struct udevice *);
+int power_check_battery(bq27xxx_battery *);
 #endif /* __BQ27XXX_FG_H_ */
 
