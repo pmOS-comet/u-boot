@@ -91,24 +91,6 @@
 		status = "okay";
 	};
 
-        panel@0 {
-                compatible = "ch13726a,rp5";
-                pinctrl-0 = <&pinctrl_mipi_gpio>;
-                reset-gpios = <&gpio4 9 GPIO_ACTIVE_HIGH>;
-                orientation = <0>;
-                rotation = <270>;
-                dsi-lanes = <4>;
-                video-mode = <0>;
-                status = "okay";
-
-                port {
-                        panel_in: endpoint {
-                                remote-endpoint = <&dsi_out>;
-                        };
-
-                };
-        };
-
 	cbtl04gp {
 		compatible = "nxp,cbtl04gp";
 		pinctrl-names = "default";
@@ -385,8 +367,28 @@
 };
 
 &mipi_dsi {
+	#address-cells = <1>;
+	#size-cells = <0>;
 	samsung,esc-clock-frequency = <16000000>;
 	status = "okay";
+
+	lcd_panel: panel@0 {
+		compatible = "ch13726a,rp5";
+		pinctrl-0 = <&pinctrl_mipi_gpio>;
+		reset-gpios = <&gpio4 9 GPIO_ACTIVE_HIGH>;
+		orientation = <0>;
+		rotation = <270>;
+		dsi-lanes = <4>;
+		video-mode = <0>;
+		status = "okay";
+
+                port {
+			panel_in: endpoint {
+				remote-endpoint = <&dsi_out>;
+			};
+
+		};
+	};
 
 	port {
 		dsi_out: endpoint {
