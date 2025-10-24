@@ -739,7 +739,7 @@ ifeq ($(LTO_ENABLE),y)
 		LTO_FINAL_LDFLAGS	+= -fuse-linker-plugin -flto=$(NPROC)
 
 		# use plugin aware tools
-		AR			= $(CROSS_COMPILE)gcc-ar
+		AR			= $(CROSS_COMPILE)ar
 		NM			= $(CROSS_COMPILE)gcc-nm
 	endif
 
