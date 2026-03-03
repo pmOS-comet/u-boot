@@ -30,6 +30,7 @@ jobs:
             flex \
             libssl-dev \
             device-tree-compiler \
+            python3-pyelftools \
             python3-setuptools \
             swig \
             wget \
@@ -48,6 +49,13 @@ jobs:
           git clone https://github.com/nxp-imx/imx-atf
           cd imx-atf/
           make PLAT=imx8mp bl31
+          cd ..
+
+      - name: Build OP-TEE
+        run: |
+          git clone https://github.com/nxp-imx/imx-optee-os -b lf-6.12.49_2.2.0
+          cd imx-optee-os/
+          make -j$(nproc --all) PLATFORM=imx-mx8mpevk LDFLAGS= CFG_TEE_TA_LOG_LEVEL=0 CFG_TEE_CORE_LOG_LEVEL=0 O=build.imx-mx8mpevk
           cd ..
 
       - name: Download LPDDR4 Training Binaries
@@ -71,6 +79,7 @@ jobs:
           cp ../u-boot/arch/arm/dts/imx8mp-mecha-comet-${{ matrix.variant }}.dtb iMX8M/imx8mp-evk.dtb
           cp ../u-boot/tools/mkimage iMX8M/mkimage_uboot
           cp ../imx-atf/build/imx8mp/release/bl31.bin iMX8M/
+          cp ../imx-optee-os/build.imx-mx8mpevk/core/tee-raw.bin iMX8M/tee.bin
           cp ../firmware-imx/firmware-imx-8.26-d4c33ab/firmware/ddr/synopsys/lpddr4_pmu_train_* iMX8M/
           
           # Build
